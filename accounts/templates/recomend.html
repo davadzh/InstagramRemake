@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Рекомендации</h1>
+    <h3>Интересное</h3>
+
+    <hr>
+
+    {% if all_pubs %}
+        {% for pub in all_pubs %}
+        <div>
+            <h3>
+                <a href="{% url 'profile' pub.author.username %}">
+                <img style="border-radius: 100px;"
+                width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
+                 {{pub.author.username}}</a></h3>
+
+            <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='300px'></a>
+            
+            <div id="like-section-{{ pub.id }}">        
+                    {% include 'like_button.html' %}
+            </div>
+
+            <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+            <p>{{pub.pub_date}}</p>
+        </div>
+        <hr>
+        {% endfor %}
+    {% else %}
+        Нет ничего в пабс
+    {% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Создать пост</h1>
+
+    <form action="{% url 'create_post_url' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                {% if field.errors %}
+                    <div>
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+
+                {% if field.label != 'Author' %}
+                    {{ field.label }} 
+                    <br>
+                    {{ field }}
+                    <br>
+                    <br>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+        <button type="submit" name="button">Создать пост</button>
+
+    </form>
+
+{% endblock %}

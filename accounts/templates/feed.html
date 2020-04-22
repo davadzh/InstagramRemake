@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Публикации</h1>
+
+    <h3>Из ваших подписок</h3>
+
+    <hr>
+
+    {% if feed_pubs %}
+        
+        {% for pub in feed_pubs %}
+            {% if pub.author in user_info.subscriptions.all %}
+                
+                <div>
+
+                    <h3>
+                    <a href="{% url 'profile' pub.author.username %}">
+                    <img style="border-radius: 100px;"
+                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
+                        {{pub.author.username}}</h3>
+                    </a>
+                    
+                    <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='400px'></a>
+                    
+                    <div id="like-section-{{ pub.id }}">        
+                            {% include 'like_button.html' %}
+                    </div>
+
+                    <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+                    <p>{{pub.pub_date}}</p>
+
+                </div>
+                <hr>
+                
+            {% elif pub.author.username == user.username %}
+                
+                <div>
+                    <h3>
+                    <a href="{% url 'profile' pub.author.username %}">
+                    <img style="border-radius: 100px;"
+                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
+                        {{pub.author.username}}</a></h3>
+                        
+                        <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='300px'></a>
+                    
+                    <div id="like-section-{{ pub.id }}">        
+                            {% include 'like_button.html' %}
+                    </div>
+
+                    <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+                    <p>{{pub.pub_date}}</p>
+                </div>
+                <hr>
+                
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+            
+    {% else %}
+    <h1>Вход</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Войти</button>
+    </form>
+    {% endif %}
+{% endblock %} 

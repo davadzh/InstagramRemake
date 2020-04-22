@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Редактировать профиль</h1>
+
+    <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                {% if field.errors %}
+                    <div>
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+
+                {% if field.label != 'Username' %}
+                    {{ field.label }}
+                    {{ field }}
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" name="button">Подтвердить</button>
+
+    </form>
+
+{% endblock %}

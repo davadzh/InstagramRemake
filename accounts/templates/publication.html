@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+
+    {% if pub %}
+        <div>
+            <h3>
+                <a href="{% url 'profile' pub.author.username %}">
+                    <img style="border-radius: 100px;"
+                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
+                        {{pub.author.username}}
+                </a>
+            </h3>
+
+
+            <img src="{{pub.pub_pic.url}}" alt="Фото публикации" width="400px">
+
+            <div id="like-section-{{ pub.id }}">        
+                {% include 'like_button.html' %}
+            </div>
+
+            <p><b>{{pub.author}}</b> {{pub.pub_text}}</p>  
+
+            <p>{{pub.pub_date}}</p>
+        </div>
+        <hr>
+
+        {% include 'comment_form.html' %}
+
+        <hr>
+            <h2>Комментарии</h2>
+        <hr>
+
+        {% for every_comm in comments_of_pub %}
+            <p><b><a href="{% url 'profile' pub.author.username %}">{{every_comm.author.username}}</a></b>  {{every_comm.comment_text}}</p>
+            <p>{{every_comm.comment_date}}</p>
+
+            <hr>
+        {% endfor %}
+
+    {% else %}
+
+    <h3>Публикация не найдена</h3>
+
+    {% endif %}
+
+{% endblock %}
+

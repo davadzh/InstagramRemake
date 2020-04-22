@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+
+    <!-- Если авторизован, смотрит свой профиль -->
+    <h1>Профиль {{current_user.username.username}}</h1>
+    <div>
+        <hr>
+        <img src="{{ current_user.profile_pic.url }}" alt="Фото профиля" width='100px'>
+        <h3>{{ current_user.name }}</h3>
+        <p>Телефон: {{ current_user.phone }}</p>
+        <p>Почта: {{ current_user.email }}</p>
+    </div>
+
+    <hr>
+
+    {% if current_user.username.username == user.username %}
+        <a href="{% url 'profile_edit' %}">Редактировать профиль</a>
+        <br>
+        <a href="{% url 'logout' %}">Выйти</a>
+    {% else %}
+
+
+        {% if user in current_user.subscribers.all %}
+            <!-- Отписка -->
+            <a href="{% url 'subscription' current_user.username.id %}">Отписаться</a>
+        {% else %}
+            <!-- Подписка -->
+            <a href="{% url 'subscription' current_user.username.id %}">Подписаться</a>
+        {% endif %}
+        
+    {% endif %}
+        <hr>
+
+    {% if all_pubs %}
+
+        {% for pub in all_pubs %}
+        <div>
+            <h3>{{pub.author}}</h3>
+            <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='300px'></a>
+
+            <div id="like-section-{{ pub.id }}">        
+                {% include 'like_button.html' %}
+            </div>
+
+            <p><b>{{pub.author}}</b> {{pub.pub_text}}</p>  
+
+            <p>{{pub.pub_date}}</p>
+        </div>
+        <hr>
+        {% endfor %}
+
+    {% else %}
+
+    <h3>У вас пока нет публикаций</h3>
+
+    {% endif %}
+
+{% endblock %}
+

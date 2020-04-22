@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        
+    {% else %}
+    <h1>Регистрация</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Зарегистрироваться</button>
+    </form>
+    {% endif %}
+{% endblock %}

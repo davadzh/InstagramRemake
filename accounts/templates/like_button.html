@@ -1,0 +1,11 @@
+<form action="{% url 'like_url' %}" method="post">
+    {% csrf_token %}
+
+    {% if user in pub.pub_likes.all %}
+        Лайки <button value='{{ pub.id }}' id="like-{{ pub.id }}" name="post_id" type="submit" style="background-color:red;color:white">{{pub.total_likes}}</button>
+    {% else %}
+        Лайки <button value='{{ pub.id }}' id="like-{{ pub.id }}" name="post_id" type="submit">{{pub.total_likes}}</button>
+    {% endif %}
+</form>
+    
+    

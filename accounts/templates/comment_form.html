@@ -1,0 +1,26 @@
+<form action="{% url 'publication' pub.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for field in comment_form %}
+        <div>
+            {% if field.errors %}
+                <div>
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+
+            {% if field.label != 'Author' %}
+            {% if field.label != 'Pub' %}
+                {{ field.label }} 
+                <br>
+                {{ field }}
+                <br>
+                <br>
+                {% endif %}
+            {% endif %}
+
+        </div>
+    {% endfor %}
+    <button type="submit" name="button">Оставить комментарий</button>
+
+</form>
