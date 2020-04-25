@@ -1,34 +1,51 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h1>Рекомендации</h1>
-    <h3>Интересное</h3>
+    <h1 class="section-name-h1">Рекомендации</h1>
+    <h3 class="section-name-h3">Интересное</h3>
+    <br>
 
-    <hr>
 
+    <div class="publications-fullwidth">
     {% if all_pubs %}
         {% for pub in all_pubs %}
-        <div>
-            <h3>
-                <a href="{% url 'profile' pub.author.username %}">
-                <img style="border-radius: 100px;"
-                width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
-                 {{pub.author.username}}</a></h3>
-
-            <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='300px'></a>
-            
-            <div id="like-section-{{ pub.id }}">        
-                    {% include 'like_button.html' %}
+        <div class="publication">
+            <div class="pub-top">
+            <div class="container-90">
+                    <div class="pub-top-vertical-align">
+                        <a href="{% url 'profile' pub.author.username %}">
+                        <img class="pub-img-profile"
+                                width="35px" src="{{pub.author.profile_info.profile_pic.url}}" 
+                                alt="Фото профиля">
+                        <h3>{{pub.author.username}}</h3>
+                        </a>
+                    </div>
             </div>
+            </div>
+            
+            <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{{pub.pub_pic.url}}" alt="Фото" class="pub-img"></div></a>
 
-            <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
-            <p>{{pub.pub_date}}</p>
+            <div class="pub-bottom">
+            <div class="container-90">
+
+                <div id="like-section-{{ pub.id }}"> 
+                <div class="like-section">         
+                        {% include 'like_button.html' %}
+                        <p class="like-counter">Лайков {{pub.total_likes}}</p>
+                </div>
+                </div>
+
+                <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+                <p class="pub-date">{{pub.pub_date}}</p>
+            </div>
+            </div>
         </div>
-        <hr>
         {% endfor %}
     {% else %}
-        Нет ничего в пабс
+        <h3 class="section-name">Нет ничего в пабс</h3>
     {% endif %}
+
+    </div>
 
 {% endblock %}
 

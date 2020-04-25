@@ -1,33 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>davadzh сайт</title>
 </head>
 <body>
     
     {% block header %}
+    <div class = "nav-bar-mobile-logo">
+        <div class="container">
+        {% if user.is_authenticated %}
+            <h1><a href="{% url 'feed' %}">inSTONKSgram</a></h1>  
+        {% else %}
+            <h1>inSTONKSgram</h1> 
+        {% endif %}
+        </div>
+    </div>
+    <div class = "nav-bar">
+        <div class="container">
         {% if user.is_authenticated %}
             <h1><a href="{% url 'feed' %}">inSTONKSgram</a></h1>
             <ul style="float: right;">
-                <li><a href="{% url 'feed' %}">Домой</a></li>
-                <li><a href="{% url 'recomend' %}">Интересное</a></li>
-                <li><a href="{% url 'create_post_url' %}">Создать пост</a></li>
-                <li><a href="{% url 'notifications' %}">Уведомления</a></li>
-                <li><a href="{% url 'profile' user.username %}">Профиль</a></li>
-                <!-- <li><a href="{% url 'logout' %}">Выйти</a></li> -->
+                <li><a href="{% url 'feed' %}"><img src="{% static 'images/home.png' %}" alt="Домой" class="nav-icon"></a></li>
+                <li><a href="{% url 'recomend' %}"><img src="{% static 'images/news.png' %}" alt="Рекомендации" class="nav-icon"></a></li>
+                <li><a href="{% url 'create_post_url' %}"><img src="{% static 'images/add.png' %}" alt="Создать публикацию" class="nav-icon"></a></li>
+                <li><a href="{% url 'notifications' %}"><img src="{% static 'images/notifications.png' %}" alt="Уведомления" class="nav-icon"></a></li>
+                <li><a href="{% url 'profile' user.username %}"><img src="{% static 'images/profile.png' %}" alt="Профиль" class="nav-icon"></a></li>
             </ul>   
         {% else %}
-            <ul>
-                <li><a href="{% url 'login_url' %}">Войти</a></li>
-                <li><a href="{% url 'register_url' %}">Регистрация</a></li>
-            </ul>
+                <ul>
+                    <li><a href="{% url 'login_url' %}">Войти</a></li>
+                    <li><a href="{% url 'register_url' %}">Регистрация</a></li>
+                </ul>
+            
         {% endif %}
-        <hr>
+        </div>
+    </div>
+
     {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+    <div class="content">
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    </div>
 
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.js"></script>
@@ -69,6 +88,10 @@
         //     });
         // });
     </script>
+
+
+{% block extra_js %}
+{% endblock %}
 
 </body>
 

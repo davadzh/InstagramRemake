@@ -4,58 +4,95 @@
 
 
     <!-- Если авторизован, смотрит свой профиль -->
-    <h1>Профиль {{current_user.username.username}}</h1>
-    <div>
-        <hr>
-        <img src="{{ current_user.profile_pic.url }}" alt="Фото профиля" width='100px'>
-        <h3>{{ current_user.name }}</h3>
-        <p>Телефон: {{ current_user.phone }}</p>
-        <p>Почта: {{ current_user.email }}</p>
-    </div>
+    <div class="profile-head">
+    <div class="head-content">
+        <div class="profile-img-and-username">
+            <img src="{{ current_user.profile_pic.url }}" alt="Фото профиля">
+            <h1>{{current_user.username.username}}</h1>
+        </div>
+        
+        <div class="profile-info">
+            <h3>{{ current_user.name }}</h3>
+            <p>Телефон: {{ current_user.phone }}</p>
+            <p>Почта: {{ current_user.email }}</p>
+        </div>
+    
 
-    <hr>
 
     {% if current_user.username.username == user.username %}
-        <a href="{% url 'profile_edit' %}">Редактировать профиль</a>
-        <br>
-        <a href="{% url 'logout' %}">Выйти</a>
+        <div class="profile-edit-or-exit">
+            <a href="{% url 'profile_edit' %}" class="p-edit">Редактировать профиль</a>
+            <a href="{% url 'logout' %}" class="p-exit">Выйти</a>
+        </div>  
     {% else %}
 
 
         {% if user in current_user.subscribers.all %}
             <!-- Отписка -->
-            <a href="{% url 'subscription' current_user.username.id %}">Отписаться</a>
+            <div class="subscription-button">
+                <a href="{% url 'subscription' current_user.username.id %}" class="unsub">Отписаться</a>
+            </div>
         {% else %}
             <!-- Подписка -->
-            <a href="{% url 'subscription' current_user.username.id %}">Подписаться</a>
+            <div class="subscription-button">
+                <a href="{% url 'subscription' current_user.username.id %}" class="sub">Подписаться</a>
+            </div>
         {% endif %}
         
     {% endif %}
-        <hr>
+    
+    </div>
+    </div>
+    
 
+    <div class="publications">
     {% if all_pubs %}
 
         {% for pub in all_pubs %}
-        <div>
-            <h3>{{pub.author}}</h3>
-            <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='300px'></a>
-
-            <div id="like-section-{{ pub.id }}">        
-                {% include 'like_button.html' %}
+        <div class="publication">
+            <div class="pub-top">
+            <div class="container-90">
+                    <div class="pub-top-vertical-align">
+                        <a href="{% url 'profile' pub.author.username %}">
+                        <img class="pub-img-profile"
+                                width="35px" src="{{pub.author.profile_info.profile_pic.url}}" 
+                                alt="Фото профиля">
+                        <h3>{{pub.author.username}}</h3>
+                        </a>
+                    </div>
             </div>
+            </div>
+            
+            <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{{pub.pub_pic.url}}" alt="Фото" class="pub-img"></div></a>
 
-            <p><b>{{pub.author}}</b> {{pub.pub_text}}</p>  
+            <div class="pub-bottom">
+            <div class="container-90">
 
-            <p>{{pub.pub_date}}</p>
+                <div id="like-section-{{ pub.id }}"> 
+                <div class="like-section">         
+                        {% include 'like_button.html' %}
+                        <p class="like-counter">Лайков {{pub.total_likes}}</p>
+                </div>
+                </div>
+
+                <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+                <p class="pub-date">{{pub.pub_date}}</p>
+            </div>
+            </div>
         </div>
-        <hr>
         {% endfor %}
 
     {% else %}
 
-    <h3>У вас пока нет публикаций</h3>
+    <h3>У вас пока нет публикаций.</h3> 
+ 
+    <div class="create-first">
+        <a href="{% url 'create_post_url' %}" class="create-first-button">Добавьте первую!</a>
+    </div>
 
     {% endif %}
+
+    </div>
 
 {% endblock %}
 

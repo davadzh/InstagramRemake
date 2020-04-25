@@ -1,27 +1,48 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h1>Редактировать профиль</h1>
 
-    <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="profile-edit-block">
+        <h1 class="section-name-h1">Редактировать профиль</h1>
 
-        {% for field in form %}
-            <div>
-                {% if field.errors %}
-                    <div>
-                        {{ field.errors }}
-                    </div>
-                {% endif %}
+        <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-                {% if field.label != 'Username' %}
-                    {{ field.label }}
-                    {{ field }}
-                {% endif %}
-            </div>
-        {% endfor %}
-        <button type="submit" name="button">Подтвердить</button>
+            {% for field in form %}
+                    {% if field.errors %}
+                        <div>
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
 
-    </form>
+                    {% if field.label == 'Username' %}
+                    {% endif %}
+
+                    {% if field.label == 'Name' %}
+                        <div class="edit-profile-text">
+                            <label>Имя</label>
+                            {{ field }}
+                        </div>
+                    {% elif field.label == 'Phone' %}
+                        <div class="edit-profile-text">
+                            <label>Телефон</label>
+                            {{ field }}
+                        </div>
+                    {% elif field.label == 'Email' %}
+                        <div class="edit-profile-text">
+                            <label>Email</label>
+                            {{ field }}
+                        </div>
+                    {% elif field.label == 'Profile pic' %}
+                        <div class="create-pub-img">
+                            <label for="id_profile_pic" class="load-pic-label">Фото профиля</label>
+                            {{ field }}
+                        </div>
+                    {% endif %}
+            {% endfor %}
+            <button type="submit" name="button">ОК</button>
+
+        </form>
+    </div> 
 
 {% endblock %}

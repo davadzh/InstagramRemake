@@ -1,47 +1,79 @@
 {% extends 'index.html' %}
+{% load static %}
 
 {% block content %}
 
 
     {% if pub %}
-        <div>
-            <h3>
-                <a href="{% url 'profile' pub.author.username %}">
-                    <img style="border-radius: 100px;"
-                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
-                        {{pub.author.username}}
-                </a>
-            </h3>
+    <div class="publication">
+        <div class="pub-top">
+        <div class="container-90">
+                <div class="pub-top-vertical-align">
+                    <a href="{% url 'profile' pub.author.username %}">
+                    <img class="pub-img-profile"
+                            width="35px" src="{{pub.author.profile_info.profile_pic.url}}" 
+                            alt="Фото профиля">
+                    <h3>{{pub.author.username}}</h3>
+                    </a>
+                </div>
 
+                {% if user.username == pub.author.username %}
+                <div class="delete-post">
+                    <a href="{% url 'pub_delete' pub.id %}">
+                        <img src="{% static 'images/trash.png' %}">
+                    </a>
+                </div>
+                {% endif %}
+                
+        </div>
+        </div>
+        
+        <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{{pub.pub_pic.url}}" alt="Фото" class="pub-img"></div></a>
 
-            <img src="{{pub.pub_pic.url}}" alt="Фото публикации" width="400px">
+        <div class="pub-bottom">
+        <div class="container-90">
 
-            <div id="like-section-{{ pub.id }}">        
-                {% include 'like_button.html' %}
+            <div id="like-section-{{ pub.id }}"> 
+            <div class="like-section">         
+                    {% include 'like_button.html' %}
+                    <p class="like-counter">Лайков {{pub.total_likes}}</p>
+            </div>
             </div>
 
-            <p><b>{{pub.author}}</b> {{pub.pub_text}}</p>  
-
-            <p>{{pub.pub_date}}</p>
+            <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+            <p class="pub-date">{{pub.pub_date}}</p>
         </div>
-        <hr>
+        </div>
+    </div>
 
-        {% include 'comment_form.html' %}
+    <div class="publication-comments">
 
-        <hr>
-            <h2>Комментарии</h2>
-        <hr>
+        <div class="comments-h1-block">
+            <h1 class="section-name-h1">Комментарии</h1>
+        </div>
 
-        {% for every_comm in comments_of_pub %}
-            <p><b><a href="{% url 'profile' pub.author.username %}">{{every_comm.author.username}}</a></b>  {{every_comm.comment_text}}</p>
-            <p>{{every_comm.comment_date}}</p>
+        <div class="publication-comment-post">
 
-            <hr>
-        {% endfor %}
+            {% include 'comment_form.html' %}
+
+        </div>
+
+        <div class="publication-comments-all">
+    
+            {% for every_comm in comments_of_pub %}
+                <div class="publication-comments-one-comment">
+                    <h4><b><a href="{% url 'profile' pub.author.username %}">{{every_comm.author.username}}</a></b>  {{every_comm.comment_text}}</h4>
+                    <p>{{every_comm.comment_date}}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    
+    </div>
 
     {% else %}
 
-    <h3>Публикация не найдена</h3>
+    <h3 class="section-name-h3">Публикация не найдена</h3>
 
     {% endif %}
 

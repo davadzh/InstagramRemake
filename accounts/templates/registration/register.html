@@ -4,11 +4,34 @@
     {% if user.is_authenticated %}
         
     {% else %}
-    <h1>Регистрация</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>Зарегистрироваться</button>
-    </form>
+
+        <div class="registration">
+            <h1 class="section-name-h1">Регистрация</h1>
+            <form method="POST" class="register-form">
+                {% csrf_token %}
+                {% for field in form %}
+                    {% if field.label == 'Имя пользователя' %}
+                    <div class="reg-inputs">
+                        <label>Никнейм</label>
+                        {{ field }}
+                    </div>
+                    {% endif %}
+                    {% if field.label == 'Пароль' %}
+                    <div class="reg-inputs">
+                        <label>Пароль</label>
+                        {{ field }}
+                    </div>
+                    {% endif %}
+                    {% if field.label == 'Подтверждение пароля' %}
+                    <div class="reg-inputs">
+                        <label>Повтор пароля</label>
+                        {{ field }}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                <button class="button-reg">Зарегистрироваться</button>
+            </form>
+        </div>
+
     {% endif %}
 {% endblock %}

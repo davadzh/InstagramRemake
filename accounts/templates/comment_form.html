@@ -2,7 +2,7 @@
     {% csrf_token %}
 
     {% for field in comment_form %}
-        <div>
+ 
             {% if field.errors %}
                 <div>
                     {{ field.errors }}
@@ -10,17 +10,15 @@
             {% endif %}
 
             {% if field.label != 'Author' %}
-            {% if field.label != 'Pub' %}
-                {{ field.label }} 
-                <br>
-                {{ field }}
-                <br>
-                <br>
+                {% if field.label != 'Pub' %}
+
+                    {{ field }}
+
                 {% endif %}
             {% endif %}
 
-        </div>
+
     {% endfor %}
-    <button type="submit" name="button">Оставить комментарий</button>
+    <button type="submit" name="button">+</button>
 
 </form>

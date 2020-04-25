@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="delete-block">
+    <h3>Вы уверены, что хотите удалить публикацию?</h3>
+    <div class="delete-buttons">
+        <a href="{% url 'delete_ready' pub_id %}" class="a-delete">Удалить</a>
+        <a href="{% url 'delete_cancel' pub_id %}" class="a-cancel">Отмена</a>
+    </div>
+</div>
+{% endblock %}

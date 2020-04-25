@@ -17,8 +17,11 @@ from datetime import datetime
 
 # Create your views here.
 
+    
 def indexView(request):
-    return render(request, 'index.html')
+    if request.user.is_authenticated:
+        return redirect('profile/' + request.user.username)
+    return redirect('login_url')
 
 
 @login_required
@@ -62,7 +65,6 @@ class ProfileEdit(LoginRequiredMixin, UpdateView):
             profile_edited = bound_form.save()
             return redirect('/profile/' + request.user.username)
         return render(request, 'profile_edit.html', context={'form': bound_form})
-
 
 
 @login_required
@@ -181,6 +183,24 @@ def publicationView(request, pub_id):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return render(request, 'publication.html', context=context)
+
+
+@login_required
+def publicationDeleteView(request, pub_id):
+    context = {'pub_id': pub_id}
+    return render(request, 'publication_delete.html', context=context)
+
+
+@login_required
+def publicationDeleteReadyView(request, pub_id):
+    need_to_delete = Publication.objects.get(id=pub_id)
+    need_to_delete.delete()
+    return redirect('/profile/' + request.user.username)
+
+
+@login_required
+def publicationDeleteCancelView(request, pub_id):
+    return redirect('/publication/' + pub_id)
 
 
 

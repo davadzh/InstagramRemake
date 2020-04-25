@@ -1,7 +1,13 @@
 {% extends 'index.html' %}
+{% load static %}
+
+
 
 {% block content %}
-    <h1>Создать пост</h1>
+
+    <div class="create-post-block">
+
+    <h1 class="section-name-h1">Создать пост</h1>
 
     <form action="{% url 'create_post_url' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -14,18 +20,36 @@
                     </div>
                 {% endif %}
 
-                {% if field.label != 'Author' %}
-                    {{ field.label }} 
-                    <br>
-                    {{ field }}
-                    <br>
-                    <br>
+                {% if field.label == 'Author' %}
+    
+                {% elif field.label == 'Введите текст публикации' %}
+                    <div class="create-pub-text">
+                        <label for="#">Введите текст публикации</label>
+                        {{ field }}
+                    </div>
+                {% elif field.label == 'Загрузите фото' %}
+                    <div class="create-pub-img">
+                        <label for="id_pub_pic" class="load-pic-label"><span>Выбрать фото</span></label>
+                        {{ field }}
+                    </div>
                 {% endif %}
 
             </div>
         {% endfor %}
-        <button type="submit" name="button">Создать пост</button>
+        <div class="create-post-button">
+            <button type="submit" name="button" class="create-post-button">+</button>
+        </div>
+        
 
     </form>
 
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/load_image.js' %}" type="text/javascript"></script>
 {% endblock %}

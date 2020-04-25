@@ -1,60 +1,90 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h1>Публикации</h1>
 
-    <h3>Из ваших подписок</h3>
 
-    <hr>
+    <h1 class="section-name-h1">Публикации</h1>
 
+    <h3 class="section-name-h3">Из ваших подписок</h3>
+    <br>
+
+
+    <div class="publications-fullwidth">
     {% if feed_pubs %}
         
         {% for pub in feed_pubs %}
+        
+
             {% if pub.author in user_info.subscriptions.all %}
-                
-                <div>
+            <div class="publication">   
+                    <div class="pub-top">
+                    <div class="container-90">
+                            <div class="pub-top-vertical-align">
+                                <a href="{% url 'profile' pub.author.username %}">
+                                <img class="pub-img-profile"
+                                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" 
+                                        alt="Фото профиля">
+                                <h3>{{pub.author.username}}</h3>
+                                </a>
+                            </div>
+                    </div>
+                    </div>
+                    
+                    <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{{pub.pub_pic.url}}" alt="Фото" class="pub-img"></div></a>
 
-                    <h3>
-                    <a href="{% url 'profile' pub.author.username %}">
-                    <img style="border-radius: 100px;"
-                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
-                        {{pub.author.username}}</h3>
-                    </a>
-                    
-                    <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='400px'></a>
-                    
-                    <div id="like-section-{{ pub.id }}">        
-                            {% include 'like_button.html' %}
+                    <div class="pub-bottom">
+                    <div class="container-90">
+    
+                        <div id="like-section-{{ pub.id }}"> 
+                        <div class="like-section">         
+                                {% include 'like_button.html' %}
+                                <p class="like-counter">Лайков {{pub.total_likes}}</p>
+                        </div>
+                        </div>
+
+                        <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+                        <p class="pub-date">{{pub.pub_date}}</p>
+                    </div>
                     </div>
 
-                    <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
-                    <p>{{pub.pub_date}}</p>
-
-                </div>
-                <hr>
-                
+            </div>  
             {% elif pub.author.username == user.username %}
-                
-                <div>
-                    <h3>
-                    <a href="{% url 'profile' pub.author.username %}">
-                    <img style="border-radius: 100px;"
-                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" alt="Фото профиля">
-                        {{pub.author.username}}</a></h3>
-                        
-                        <a href="{% url 'publication' pub.id %}"><img src="{{pub.pub_pic.url}}" alt="Фото" width='300px'></a>
-                    
-                    <div id="like-section-{{ pub.id }}">        
-                            {% include 'like_button.html' %}
+            <div class="publication">   
+                <div class="pub-top">
+                    <div class="container-90">
+                            <div class="pub-top-vertical-align">
+                                <a href="{% url 'profile' pub.author.username %}">
+                                <img class="pub-img-profile"
+                                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" 
+                                        alt="Фото профиля">
+                                <h3>{{pub.author.username}}</h3>
+                                </a>
+                            </div>
                     </div>
-
-                    <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
-                    <p>{{pub.pub_date}}</p>
                 </div>
-                <hr>
-                
+                    
+                    <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{{pub.pub_pic.url}}" alt="Фото" class="pub-img"></div></a>
+
+                    <div class="pub-bottom">
+                    <div class="container-90">
+
+                        <div id="like-section-{{ pub.id }}"> 
+                        <div class="like-section">         
+                                {% include 'like_button.html' %}
+                                <p class="like-counter">Лайков {{pub.total_likes}}</p>
+                        </div>
+                        </div>
+
+                        <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
+                        <p class="pub-date">{{pub.pub_date}}</p>
+                    </div>
+                    </div>
+            </div>
             {% endif %}
+        
+
         {% endfor %}
     {% endif %}
+    </div>
 
 {% endblock %}

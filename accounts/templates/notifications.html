@@ -1,17 +1,28 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h1>Уведомления</h1>
 
-    <hr>
+    <h1 class="section-name-h1">Уведомления</h1>
+
+    <div class="notifications-block">
     {% if nots %}
+    
         {% for n in nots %}
+        <div class="notification">
             <h4><a href="{% url 'profile' n.notification_from %}">{{n.notification_from}}</a> {{n.notification_text}}</h4>
             <p>{{n.not_date}}</p>
-            <hr>
+
+        </div>
         {% endfor %}
+    
     {% else %}
+    <div class="notification">
         <h3>У вас нет новых уведомлений</h3>
+    </div>
     {% endif %}
+
+    </div>
+
+
 
 {% endblock %}
