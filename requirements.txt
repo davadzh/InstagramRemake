@@ -55,7 +55,6 @@ pexpect==4.7.0
 pickleshare==0.7.5
 Pillow==6.1.0
 sqlparse==0.3.1
-statsmodels==0.10.0
 terminado==0.8.2
 testpath==0.4.2
 toolz==0.10.0
