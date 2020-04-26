@@ -130,6 +130,6 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'recomend'
 
-MEDIA_URL = '/images/'
+MEDIA_URL = '/static/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
