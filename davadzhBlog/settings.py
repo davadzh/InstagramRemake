@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,13 @@ LOGIN_REDIRECT_URL = 'recomend'
 MEDIA_URL = '/static/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+AWS_ACCESS_KEY_ID = 'AKIA24IKDTIALUVOKNVK'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'instonksgram-bucket'
+
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
