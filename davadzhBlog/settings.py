@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!awzy*-pk^rj*#z9_xuuvuz+nlm_4%!^$*^_r8ep#!9oe(x75w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['instonksgram.herokuapp.com', '127.0.0.1']
 
@@ -146,7 +146,7 @@ AWS_DEFAULT_ACL = None
 # STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-STATIC_URL = 'http://s3.eu-west-2.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
+STATIC_URL = 'https://s3.eu-west-2.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
 
 
 AWS_S3_HOST = "s3.us-east-1.amazonaws.com"
