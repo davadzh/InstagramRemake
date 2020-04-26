@@ -150,4 +150,6 @@ STATIC_URL = 'https://s3.eu-west-2.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME +
 
 
 AWS_S3_HOST = "s3.us-east-1.amazonaws.com"
+
 AWS_S3_REGION_NAME="us-east-1"
+
