@@ -9,25 +9,31 @@
             <h1 class="section-name-h1">Регистрация</h1>
             <form method="POST" class="register-form">
                 {% csrf_token %}
+                <p style="font-size: 12px;color:#cab154;">Пароль должен состоять минимум из 8 символов и не должен быть слишком простым.</p>
                 {% for field in form %}
+
+
                     {% if field.label == 'Имя пользователя' %}
                     <div class="reg-inputs">
                         <label>Никнейм</label>
                         {{ field }}
                     </div>
                     {% endif %}
+
                     {% if field.label == 'Пароль' %}
                     <div class="reg-inputs">
                         <label>Пароль</label>
                         {{ field }}
                     </div>
                     {% endif %}
+
                     {% if field.label == 'Подтверждение пароля' %}
                     <div class="reg-inputs">
                         <label>Повтор пароля</label>
                         {{ field }}
                     </div>
                     {% endif %}
+
                 {% endfor %}
                 <button class="button-reg">Зарегистрироваться</button>
             </form>

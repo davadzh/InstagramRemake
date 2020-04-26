@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!awzy*-pk^rj*#z9_xuuvuz+nlm_4%!^$*^_r8ep#!9oe(x75w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['instonksgram.herokuapp.com', '127.0.0.1']
 
@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nonstatic',
     'django.contrib.staticfiles',
+    'storages',
+    # 'storages.backends.s3boto',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -119,13 +122,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 STATIC_URL = '/static/'
 
 
@@ -134,3 +134,20 @@ LOGIN_REDIRECT_URL = 'recomend'
 MEDIA_URL = '/static/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+
+AWS_ACCESS_KEY_ID = 'AKIA24IKDTIALUVOKNVK'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'instonksgram-bucket'
+
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = 'https://s3.eu-west-2.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
+
+
+AWS_S3_HOST = "s3.us-east-1.amazonaws.com"
+AWS_S3_REGION_NAME="us-east-1"

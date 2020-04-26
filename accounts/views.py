@@ -17,6 +17,17 @@ from datetime import datetime
 
 # Create your views here.
 
+
+# def handler404(request, exception, template_name="404.html"):
+#     response = render_to_response("404.html")
+#     response.status_code = 404
+#     return response
+
+# def handler500(request, exception, template_name="500.html"):
+#     response = render_to_response("500.html")
+#     response.status_code = 500
+#     return response
+
     
 def indexView(request):
     if request.user.is_authenticated:
@@ -107,6 +118,7 @@ def subscription_process(request, other_user):
 
 @login_required
 def like_post(request):
+    print(request.POST)
     all_pubs = Publication.objects.order_by('-pub_date')[:100]
     user = request.user
     # obj = Publication.objects.get(id=request.POST.get('post_id'))
@@ -135,13 +147,13 @@ def like_post(request):
                                                             pub_id=obj.id)
 
     context = {
-        'obj': obj,
+        'pub': obj,
         'is_liked': is_liked,
         'total_likes': obj.total_likes()
     }
-    # if request.is_ajax():
-    #     html = render_to_string('like_button.html', context, request=request)
-    #     return JsonResponse({'form': html})
+    if request.is_ajax():
+        html = render_to_string('like_button.html', context, request=request)
+        return JsonResponse({'cont': html})
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     # return render(request, 'recomend.html', {'all_pubs': all_pubs, 'is_liked': is_liked, 'current_p_id': request.POST.get('post_id')})
 

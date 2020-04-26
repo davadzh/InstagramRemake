@@ -28,12 +28,7 @@
             <div class="pub-bottom">
             <div class="container-90">
 
-                <div id="like-section-{{ pub.id }}"> 
-                <div class="like-section">         
                         {% include 'like_button.html' %}
-                        <p class="like-counter">Лайков {{pub.total_likes}}</p>
-                </div>
-                </div>
 
                 <p><b>{{pub.author.username}}</b> {{pub.pub_text}}</p>
                 <p class="pub-date">{{pub.pub_date}}</p>

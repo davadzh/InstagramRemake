@@ -1,16 +1,39 @@
 {% load static %}
-<form action="{% url 'like_url' %}" method="post">
-    {% csrf_token %}
 
+
+
+<div id="like-section-{{ pub.id }}"> 
+<div class="like-section">   
+    <div class="form-in-past">
     {% if user in pub.pub_likes.all %}
-        <button value='{{ pub.id }}' id="like-{{ pub.id }}" name="post_id" type="submit" class="like-button">
-            <img src="{% static 'images/like_active.png' %}" alt="Like" class="like-button-active">
-        </button>
-    {% else %}
         <button value='{{ pub.id }}' id="like-{{ pub.id }}" name="post_id" type="submit" class="like-button">
             <img src="{% static 'images/like_passive.png' %}" alt="Like" class="like-button-passive">
         </button>
+    {% elif user not in pub.pub_likes.all %}
+        
+        <button value='{{ pub.id }}' id="like-{{ pub.id }}" name="post_id" type="submit" class="like-button">
+            <img src="{% static 'images/like_active.png' %}" alt="Like" class="like-button-active">
+        </button>
+        
     {% endif %}
-</form>
+    </div>
+    <p class="like-counter">Лайков {{pub.total_likes}}</p>
+
+</div>
+</div>
+
+<script>
+    $("#like-{{pub.id}}").click(function(event){
+        $.ajax({
+            method: "POST",
+            url: "{% url 'like_url' %}",
+            data: {csrfmiddlewaretoken: "{{ csrf_token }}", post_id: "{{ pub.id }}"},
+            dataType: 'json',
+            success: function(response){
+                $('#like-section-{{ pub.id }}').html(response['cont']);
+            }
+        });
+    });
+</script>
     
     
