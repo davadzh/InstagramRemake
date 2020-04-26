@@ -49,50 +49,6 @@
     </div>
 
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
-    <script
-      src="https://code.jquery.com/jquery-3.5.0.min.js"
-      integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
-      crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        $(window).on("scroll", function(){
-            $('input[name="scroll"]').val($(window).scrollTop());
-        });
-        // var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-        // var obj_id = "{{ current_p_id }}";
-        // console.log(obj_id);
-        // $(document).ready(function(event){
-        //     $(document).on('click', '#like-{{ current_p_id }}', function(event){
-        //         event.preventDefault();
-        //         var pk = $(this).attr('value');
-        //         $.ajax({
-        //             type: 'POST',
-        //             url: '{% url "like_url" %}',
-        //             headers:{
-                        
-        //                 "X-CSRFToken": csrftoken
-        //             },
-        //             data:{
-        //                 "post_id": pk
-        //             },
-        //             dataType: 'json',
-        //             success: function(response){
-        //                 $('#like-section-{{ current_p_id }}').html(response['form'])
-        //                 console.log($('#like-section-{{ current_p_id }}').html(response['form']));
-        //             },
-        //             error: function(rs, e){
-        //                 console.log(rs.responseText);
-        //             }
-        //         });
-        //     });
-        // });
-    </script>
-
-
-{% block extra_js %}
-{% endblock %}
-
 </body>
 
 </html>
