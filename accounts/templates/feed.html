@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -22,7 +23,7 @@
                             <div class="pub-top-vertical-align">
                                 <a href="{% url 'profile' pub.author.username %}">
                                 <img class="pub-img-profile"
-                                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" 
+                                        width="35px" src="{% static pub.author.profile_info.profile_pic.url %}" 
                                         alt="Фото профиля">
                                 <h3>{{pub.author.username}}</h3>
                                 </a>
@@ -30,7 +31,7 @@
                     </div>
                     </div>
                     
-                    <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{{pub.pub_pic.url}}" alt="Фото" class="pub-img"></div></a>
+                    <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{% static pub.pub_pic.url %}" alt="Фото" class="pub-img"></div></a>
 
                     <div class="pub-bottom">
                     <div class="container-90">
@@ -51,7 +52,7 @@
                             <div class="pub-top-vertical-align">
                                 <a href="{% url 'profile' pub.author.username %}">
                                 <img class="pub-img-profile"
-                                        width="35px" src="{{pub.author.profile_info.profile_pic.url}}" 
+                                        width="35px" src="{% static pub.author.profile_info.profile_pic.url %}" 
                                         alt="Фото профиля">
                                 <h3>{{pub.author.username}}</h3>
                                 </a>
@@ -59,7 +60,7 @@
                     </div>
                 </div>
                     
-                    <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{{pub.pub_pic.url}}" alt="Фото" class="pub-img"></div></a>
+                    <a href="{% url 'publication' pub.id %}"><div class="pub-img-div"><img src="{% static pub.pub_pic.url %}" alt="Фото" class="pub-img"></div></a>
 
                     <div class="pub-bottom">
                     <div class="container-90">

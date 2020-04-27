@@ -7,13 +7,12 @@
     <div class="form-in-past">
     {% if user in pub.pub_likes.all %}
     <button value='{{ pub.id }}' id="like-{{ pub.id }}" name="post_id" type="submit" class="like-button">
-        <img src="{% static 'images/like_active.png' %}" alt="Like" class="like-button-active">
-    </button>
+        <img src="{% static 'static/images/like_active.png' %}" alt="Like" class="like-button-active">
+    </button> 
     {% elif user not in pub.pub_likes.all %}
     <button value='{{ pub.id }}' id="like-{{ pub.id }}" name="post_id" type="submit" class="like-button">
-        <img src="{% static 'images/like_passive.png' %}" alt="Like" class="like-button-passive">
+        <img src="{% static 'static/images/like_passive.png' %}" alt="Like" class="like-button-passive">
     </button>
-        
         
         
     {% endif %}
