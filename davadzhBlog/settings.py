@@ -119,32 +119,36 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-STATIC_URL = '/static/'
-
-
 LOGIN_REDIRECT_URL = 'recomend'
-
-MEDIA_URL = '/static/images/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-
 
 AWS_ACCESS_KEY_ID = 'AKIA24IKDTIALUVOKNVK'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'instonksgram-bucket'
-
-
+AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-STATIC_URL = 'https://s3.eu-west-2.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
 
 
 AWS_S3_HOST = "s3.eu-west-2.amazonaws.com"
 AWS_S3_REGION_NAME="eu-west-2"
+
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+# STATIC_URL = '/static/'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.eu-west-2.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+STATICFILES_LOCATION = ''
+MEDIAFILES_LOCATION = 'static/images'
+
+STATICFILES_STORAGE = 'davadzhBlog.custom_storages.StaticStorage'
+DEFAULT_FILE_STORAGE = 'davadzhBlog.custom_storages.MediaStorage'
+
+
+# STATIC_URL = 'https://s3.eu-west-2.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/static/'
+# # MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
+# MEDIA_URL = 'https://s3.eu-west-2.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + 'images/'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
