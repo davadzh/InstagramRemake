@@ -6,6 +6,11 @@
     {% else %}
     <div class="registration">
         <h1 class="section-name-h1">Вход</h1>
+        {% if is_failed %}
+            <br>
+            <p style="color: #a72d2d;">Неверно введен логин или пароль.</p>
+            <br>
+        {% endif %}
         <form method="POST">
             {% csrf_token %}
             {% for field in form %}

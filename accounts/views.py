@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import View, RedirectView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -215,6 +216,23 @@ def publicationDeleteCancelView(request, pub_id):
     return redirect('/publication/' + pub_id)
 
 
+def loginView(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('recomend')
+        else:
+            is_failed = True
+            user = AuthenticationForm()
+            return render(request, 'registration/login.html', {'form': user, 'is_failed': is_failed})
+    else:
+        is_failed = False
+        user = AuthenticationForm()
+        return render(request, 'registration/login.html', {'form': user, 'is_failed': is_failed})
+
 
 def registerView(request):
     if request.method == 'POST':
@@ -229,6 +247,10 @@ def registerView(request):
             if form_info.is_valid():
                 form_info.save()
             return redirect('login_url')
+        else:
+            is_failed = True
+            return render(request, 'registration/register.html', {'form': form, 'is_failed': is_failed})
     else:
+        is_failed = False
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})

@@ -10,6 +10,13 @@
             <form method="POST" class="register-form">
                 {% csrf_token %}
                 <p style="font-size: 12px;color:#cab154;">Пароль должен состоять минимум из 8 символов и не должен быть слишком простым.</p>
+                
+                {% if is_failed %}
+                    <br>
+                    <p style="color: #a72d2d;">Данные введены некорректно, перепроверьте их.</p>
+                    <br>
+                {% endif %}
+                <p></p>
                 {% for field in form %}
 
 

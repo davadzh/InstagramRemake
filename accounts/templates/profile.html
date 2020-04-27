@@ -14,6 +14,8 @@
         
         <div class="profile-info">
             <h3>{{ current_user.name }}</h3>
+            <p>Подписчиков: {{ current_user.total_subs }}</p>
+            <p>Подписок: {{ current_user.total_subscr }}</p>
             <p>Телефон: {{ current_user.phone }}</p>
             <p>Почта: {{ current_user.email }}</p>
         </div>
@@ -81,12 +83,12 @@
         {% endfor %}
 
     {% else %}
-
-    <h3>У вас пока нет публикаций.</h3> 
- 
-    <div class="create-first">
-        <a href="{% url 'create_post_url' %}" class="create-first-button">Добавьте первую!</a>
-    </div>
+    
+        <h3>У вас пока нет публикаций.</h3> 
+    
+        <div class="create-first">
+            <a href="{% url 'create_post_url' %}" class="create-first-button">Добавьте первую!</a>
+        </div>
 
     {% endif %}
 

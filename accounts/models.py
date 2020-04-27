@@ -13,8 +13,15 @@ class Profile_info(models.Model):
     subscribers = models.ManyToManyField(User, blank='True', related_name='subscribers')
     subscriptions = models.ManyToManyField(User, blank='True', related_name='subscriptions')
 
+    def total_subs(self):
+        return self.subscribers.count() 
+
+    def total_subscr(self):
+        return self.subscriptions.count() 
+    
     def __str__(self):
         return self.username.username
+
 
 
 class Notification(models.Model):
@@ -26,7 +33,6 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.notification_text
-
 
 
 
