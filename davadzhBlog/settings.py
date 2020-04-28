@@ -81,6 +81,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'demo_1',
+#         'USER': 'davadzh',
+#         'PASSWORD': '500935914Dl',
+#         'HOST': 'database-1.ccuqhironcqf.eu-west-2.rds.amazonaws.com',
+#         'PORT': '5432'
+#     }
+# }
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
