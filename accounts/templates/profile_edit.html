@@ -7,7 +7,6 @@
 
         <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
             {% for field in form %}
                     {% if field.errors %}
                         <div>
@@ -16,27 +15,30 @@
                     {% endif %}
 
                     {% if field.label == 'Username' %}
-                    {% endif %}
+                    {% elif field.label == 'Subscribers' %}
 
+                    {% elif field.label == 'Subscriptions' %}
+ 
+                    {% endif %}
                     {% if field.label == 'Name' %}
                         <div class="edit-profile-text">
                             <label>Имя</label>
-                            {{ field }}
+                            <input type="text" name="name" maxlength="50" id="id_name" value="{{user.profile_info.name}}">
                         </div>
                     {% elif field.label == 'Phone' %}
                         <div class="edit-profile-text">
                             <label>Телефон</label>
-                            {{ field }}
+                            <input type="text" name="phone" maxlength="50" id="id_phone" value="{{user.profile_info.phone}}">
                         </div>
                     {% elif field.label == 'Email' %}
                         <div class="edit-profile-text">
                             <label>Email</label>
-                            {{ field }}
+                            <input type="text" name="email" maxlength="50" id="id_email" value="{{user.profile_info.email}}">
                         </div>
                     {% elif field.label == 'Profile pic' %}
                         <div class="create-pub-img">
                             <label for="id_profile_pic" class="load-pic-label">Фото профиля</label>
-                            {{ field }}
+                            <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic">
                         </div>
                     {% endif %}
             {% endfor %}

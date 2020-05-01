@@ -24,7 +24,7 @@ class CommentForm(forms.ModelForm):
 class Profile_InfoForm(forms.ModelForm):
     class Meta:
         model = Profile_info
-        fields = ['username', 'name', 'phone', 'email', 'profile_pic']
+        fields = ['username', 'name', 'phone', 'email', 'profile_pic', 'subscribers', 'subscriptions']
 
     # def save(self):
     #     new_publication = Publication.objects.create(

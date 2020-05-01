@@ -68,8 +68,23 @@ class ProfileEdit(LoginRequiredMixin, UpdateView):
     def post(self, request):
         # Заменяем в словаре значение id автора с дефолтного на юзер id
         a_id = str(request.user.id)
+        user = get_object_or_404(Profile_info, username = request.user.id)
+        print()
+        print()
+        print()
+        print(request.POST)
+        print()
+        print()
+        print()
         request.POST = request.POST.copy()
         request.POST.update({'username': a_id})
+
+        for i in user.subscriptions.all():
+            request.POST.update({'subscriptions': i.id})
+
+        for i in user.subscribers.all():
+            request.POST.update({'subscribers': i.id})
+
         bound_form = Profile_InfoForm(request.POST, request.FILES)
         current_data = Profile_info.objects.filter(username = a_id)
         current_data.delete()
