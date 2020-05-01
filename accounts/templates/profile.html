@@ -84,10 +84,16 @@
 
     {% else %}
     
-        <h3>У вас пока нет публикаций.</h3> 
-    
-        <div class="create-first">
-            <a href="{% url 'create_post_url' %}" class="create-first-button">Добавьте первую!</a>
+        <div class="publication-none">
+        {% if current_user.username.username == user.username %}
+            <h3>У вас пока нет публикаций.</h3> 
+        
+            <div class="create-first">
+                <a href="{% url 'create_post_url' %}" class="create-first-button">Добавьте первую!</a>
+            </div>
+        {% else %}
+            <h3>У пользователя пока нет публикаций</h3>
+        {% endif %}
         </div>
 
     {% endif %}
