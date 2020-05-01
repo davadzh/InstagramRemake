@@ -58,7 +58,7 @@
     
             {% for every_comm in comments_of_pub %}
                 <div class="publication-comments-one-comment">
-                    <h4><b><a href="{% url 'profile' pub.author.username %}">{{every_comm.author.username}}</a></b>  {{every_comm.comment_text}}</h4>
+                    <h4><b><a href="{% url 'profile' every_comm.author.username %}">{{every_comm.author.username}}</a></b>  {{every_comm.comment_text}}</h4>
                     <p>{{every_comm.comment_date}}</p>
                 </div>
             {% endfor %}
