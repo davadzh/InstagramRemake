@@ -1,7 +1,7 @@
 boto==2.49.0
 boto3==1.12.46
 botocore==1.15.46
-Django==3.0.5
+Django==3.0.7
 django-filter==2.2.0
 django-grappelli==2.14.1
 django-storages==1.9.1
